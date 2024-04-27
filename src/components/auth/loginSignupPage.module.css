@@ -1,0 +1,45 @@
+.authPanel
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.innerWrapper
+{
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.login
+{
+    margin-top: 20px;
+    background: var(--secondary-dark);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: var(--radius-md);
+}
+
+.form-control
+{
+    background: var(--white) !important;
+    color: var(--accent) !important;
+}
+
+.login button
+{
+    border: none !important;
+    padding: 10px 25px;
+}
+
+.label
+{
+    color: red;
+}
+
+.switchForm button
+{
+    background: transparent;
+    color: var(--white);
+}

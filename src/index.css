@@ -1,0 +1,155 @@
+:root
+{
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --dark: #161616;
+  --secondary-dark: #1B1B1B;
+  --border-color: #262626;
+  --light-border: #3F3E3E;
+  --accent: #F35034;
+  --accent-hover: rgb(197, 65, 42);
+  --white: #ffffff;
+
+  --light-text: #C0C0C0;
+
+  --radius-md: 14px;
+  --radius-lg: 48px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+a
+{
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: inherit;
+}
+
+a:hover
+{
+  color: var(--accent-hover);
+}
+
+body
+{
+  margin: 0;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--dark);
+}
+
+h1
+{
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button
+{
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover
+{
+  border-color: var(--accent);
+}
+
+button:focus,
+button:focus-visible
+{
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light)
+{
+  :root
+  {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover
+  {
+    color: var(--accent-hover);
+  }
+
+  button
+  {
+    background-color: #f9f9f9;
+  }
+}
+
+p
+{
+  margin: 0;
+}
+
+
+
+
+/*=============================================
+=            Utils            =
+=============================================*/
+
+.site-content
+{
+  margin-bottom: 20px;
+}
+
+.text-accent
+{
+  color: var(--accent);
+}
+
+.common-btn
+{
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s;
+  width: fit-content;
+}
+
+
+.common-btn:hover
+{
+  background: var(--accent-hover);
+}
+
+
+.rdp
+{
+  margin: 0 !important;
+  --rdp-cell-size: 40px;
+  --rdp-caption-font-size: 18px;
+  --rdp-accent-color: var(--accent);
+  --rdp-background-color: var(--accent);
+  --rdp-accent-color-dark: var(--accent);
+  --rdp-background-color-dark: var(--accent);
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+  --rdp-selected-color: #fff;
+}
+
+
+.w-fit
+{
+  width: fit-content;
+}
+
+/*=====  End of Utils  ======*/

@@ -1,0 +1,25 @@
+.navbar
+{
+    padding: 8px 20px;
+    background: var(--secondary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.navbarLogo
+{
+    font-size: 18px;
+    color: var(--accent);
+}
+
+.userInfo
+{
+    color: var(--white);
+}
+
+.userName
+{
+    margin: 0 0 0 10px;
+    color: var(--accent);
+    font-weight: 700;
+}

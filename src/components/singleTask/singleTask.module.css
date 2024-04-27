@@ -1,0 +1,53 @@
+.task
+{
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid var(--light-border);
+    border-radius: var(--radius-md);
+    background: var(--secondary-dark);
+}
+
+.taskName p
+{
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.taskDescription p
+{
+    font-size: 14px;
+    color: var(--light-text);
+}
+
+.date p
+{
+    font-size: 14px;
+    color: var(--light-text);
+}
+
+.date p span
+{
+    color: var(--accent);
+}
+
+.taskStaus p
+{
+    font-size: 14px;
+    color: var(--light-text);
+}
+
+.taskStaus p span
+{
+    color: var(--accent);
+}
+
+.taskControl
+{
+    display: flex;
+    gap: 10px;
+}
