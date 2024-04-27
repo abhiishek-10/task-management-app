@@ -3,8 +3,8 @@ import { selectAuthState } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import styles from "./customNavbar.module.css";
 import { logout } from "../../apis/authApi";
+import styles from "./customNavbar.module.css";
 
 function CustomNavbar() {
   const authState = useSelector(selectAuthState);

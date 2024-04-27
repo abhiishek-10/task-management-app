@@ -16,8 +16,8 @@ const TaskShowcasePanel = (props) => {
   const error = useSelector((state) => state.task.error);
 
   return (
-    <div>
-      <h5 className="text-accent mb-3 ms-3">Your Tasks</h5>
+    <div className="mt-5">
+      <h5 className="text-accent mb-3 ms-3 fw-bold">Your Tasks</h5>
       <div className={`mt-3 ${styles.taskShowcasePanel}`}>
         <div className={styles.taskList}>
           {loading ? (

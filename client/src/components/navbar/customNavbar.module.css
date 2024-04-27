@@ -1,6 +1,6 @@
 .navbar
 {
-    padding: 8px 20px;
+    padding: 8px 20px !important;
     background: var(--secondary-dark);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -8,18 +8,22 @@
 
 .navbarLogo
 {
-    font-size: 18px;
-    color: var(--accent);
+    font-size: 18px !important;
+    color: var(--accent) !important;
+    font-weight: 700;
 }
 
 .userInfo
 {
-    color: var(--white);
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    margin-right: 20px;
 }
 
 .userName
 {
     margin: 0 0 0 10px;
     color: var(--accent);
+
     font-weight: 700;
 }

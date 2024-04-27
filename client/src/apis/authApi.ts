@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setError, setLoading, setTasks } from "../features/task/taskSlice";
 
-const BASE_URL = "http://localhost:3001/auth";
+const BASE_URL = "http://localhost:4000/auth";
 interface Task {
   id: string;
   taskName: string;
@@ -50,7 +50,7 @@ export const fetchTasks = () => async (dispatch) => {
     };
 
     const response = await axios.get<Task[]>(
-      "http://localhost:3001/tasks",
+      "http://localhost:4000/tasks",
       config
     );
 
@@ -93,7 +93,7 @@ export const addTaskAction = async (taskData: Omit<Task, "id">) => {
       },
     };
     const response = await axios.post<Task>(
-      "http://localhost:3001/tasks",
+      "http://localhost:4000/tasks",
       taskData,
       config
     );
@@ -113,7 +113,7 @@ export const deleteTaskAction = async (taskId: string) => {
       },
     };
     const response = await axios.delete<Task>(
-      `http://localhost:3001/tasks/${taskId}`,
+      `http://localhost:4000/tasks/${taskId}`,
       config
     );
 
@@ -146,7 +146,7 @@ export const editTaskAction = async (
       status: status,
     };
     const response = await axios.put<Task>(
-      `http://localhost:3001/tasks/${taskId}`,
+      `http://localhost:4000/tasks/${taskId}`,
       body,
       config
     );

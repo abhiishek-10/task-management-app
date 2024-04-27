@@ -30,7 +30,7 @@ const LoginSignupPageView: React.FC = () => {
       navigate("/task-manager");
     } catch (error) {
       // Handle login error
-      setIsAuthError(!isAuthError);
+      setIsAuthError(true);
     }
   };
 
@@ -54,7 +54,7 @@ const LoginSignupPageView: React.FC = () => {
       setIsLogin(true);
     } catch (error) {
       // Handle signup error
-      setIsAuthError(!isAuthError);
+      setIsAuthError(true);
     }
   };
   const handleChangeForm = (e) => {

@@ -66,7 +66,9 @@ const SingleTask: React.FC<SingleTaskProps> = ({
           className="common-btn"
           onClick={() => {
             dispatch(deleteTask(taskId));
-            setUpdateDelete((prev) => !prev);
+            setTimeout(() => {
+              setUpdateDelete((prev) => !prev);
+            }, 500);
           }}
         >
           Delete
