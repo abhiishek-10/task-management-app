@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "./loginSignupPage.module.css";
 
-const LoginSignupPage: React.FC = () => {
+const LoginSignupPageView: React.FC = () => {
   const dispatch = useDispatch();
   const authState = useSelector(selectAuthState);
   const [username, setUsername] = useState("");
@@ -19,11 +19,6 @@ const LoginSignupPage: React.FC = () => {
   const [isAuthError, setIsAuthError] = useState(false);
   const navigate = useNavigate();
 
-  // Redirect to task manager page if user is already authenticated
-
-  if (authState.isAuthenticated == true && !!localStorage.getItem("token")) {
-    navigate("/task-manager");
-  }
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
@@ -151,6 +146,22 @@ const LoginSignupPage: React.FC = () => {
       </Container>
     </div>
   );
+};
+
+const UseRedirectToHome = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/task-manager");
+  }, []);
+  return;
+};
+
+const LoginSignupPage = () => {
+  if (localStorage.getItem("token")) {
+    return UseRedirectToHome();
+  } else {
+    return LoginSignupPageView();
+  }
 };
 
 export default LoginSignupPage;

@@ -4,14 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import CustomNavbar from "../../components/navbar/CustomNavbar";
 import styles from "./mainPanel.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const MainPanel = () => {
+const UseRedirectToLogin = () => {
   const navigate = useNavigate();
-  if (localStorage.getItem("token") === null) {
-    // If not authenticated, redirect to the login page
+  useEffect(() => {
     navigate("/");
-  }
+  }, []);
+  return;
+};
+
+const mainPanelView = () => {
   const [value, setValue] = useState(false);
 
   const handleTaskUpdate = () => {
@@ -33,6 +36,14 @@ const MainPanel = () => {
       </div>
     </main>
   );
+};
+
+const MainPanel = () => {
+  if (localStorage.getItem("token") !== null) {
+    return mainPanelView();
+  } else {
+    return UseRedirectToLogin();
+  }
 };
 
 export default MainPanel;
