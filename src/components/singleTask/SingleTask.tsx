@@ -11,6 +11,7 @@ interface SingleTaskProps {
   description: string;
   dueDate: Date;
   taskStatus: string;
+  setUpdateDelete: (newValue: boolean) => void;
 }
 
 const SingleTask: React.FC<SingleTaskProps> = ({
@@ -19,9 +20,24 @@ const SingleTask: React.FC<SingleTaskProps> = ({
   description,
   dueDate,
   taskStatus,
+  setUpdateDelete,
 }) => {
   const dispatch = useDispatch();
-  // Add: Auth and Task add, delete, (no reflect)
+
+  const editHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      editedTaskValue({
+        taskId,
+        taskName,
+        description,
+        dueDate,
+        taskStatus,
+      })
+    );
+  };
+
   return (
     <div className={styles.task}>
       <div className={styles.taskDetails}>
@@ -43,26 +59,14 @@ const SingleTask: React.FC<SingleTaskProps> = ({
         </p>
       </div>
       <div className={styles.taskControl}>
-        <button
-          className="common-btn"
-          onClick={() => {
-            dispatch(
-              editedTaskValue({
-                taskId,
-                taskName,
-                description,
-                dueDate,
-                taskStatus,
-              })
-            );
-          }}
-        >
+        <button className="common-btn" onClick={editHandler}>
           Edit
         </button>
         <button
           className="common-btn"
           onClick={() => {
             dispatch(deleteTask(taskId));
+            setUpdateDelete((prev) => !prev);
           }}
         >
           Delete

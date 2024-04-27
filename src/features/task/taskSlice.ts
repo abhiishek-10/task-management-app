@@ -1,9 +1,8 @@
-import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   addTaskAction,
   deleteTaskAction,
-  EditTaskAction,
+  editTaskAction,
 } from "../../apis/authApi";
 
 interface Task {
@@ -33,32 +32,21 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
-      // state.tasks.push({
-      //   id: nanoid(),
-      //   taskName: action.payload.taskName,
-      //   taskDescription: action.payload.taskDescription,
-      //   dueDate: action.payload.dueDate,
-      //   status: "Incomplete",
-      // });
       addTaskAction(action.payload);
     },
     deleteTask: (state, action) => {
-      // console.log("deleteTask", action.payload);
       deleteTaskAction(action.payload);
-      // state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
     editTask: (state, action) => {
-      // const { id, taskName, taskDescription, dueDate } = action.payload;
-      EditTaskAction(action.payload);
-      // const existingTask = state.tasks.find((task) => task.id === id);
-      // if (existingTask) {
-      //   existingTask.taskName = taskName;
-      //   existingTask.taskDescription = taskDescription;
-      //   existingTask.dueDate = dueDate;
-      // }
+      editTaskAction(
+        action.payload.id,
+        action.payload.title,
+        action.payload.description,
+        action.payload.dueDate,
+        action.payload.status.toString()
+      );
     },
     editedTaskValue: (state, action) => {
-      console.log("action.payload", action.payload);
       state.editedTaskValues = action.payload;
     },
 
@@ -90,5 +78,3 @@ export const {
 } = taskSlice.actions;
 
 export default taskSlice.reducer;
-
-// Async action to fetch tasks from the backend API

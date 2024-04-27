@@ -39,37 +39,27 @@ export const signup = async (username: string, password: string) => {
 
 export const fetchTasks = () => async (dispatch) => {
   try {
-    // Set loading state to true
     dispatch(setLoading(true));
 
-    // Get token from state (assuming it's stored after successful login)
     const token = localStorage.getItem("token");
 
-    // Set headers
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
 
-    // Fetch tasks from the backend API
     const response = await axios.get<Task[]>(
       "http://localhost:3001/tasks",
       config
     );
 
-    // Set tasks state with the fetched tasks
-    // response.data.forEach((task) => {
     dispatch(setTasks(response.data));
-    // });
 
-    // Set loading state to false
     dispatch(setLoading(false));
   } catch (error: any) {
-    // Set error state
     dispatch(setError(error.message));
 
-    // Set loading state to false
     dispatch(setLoading(false));
   }
 };
@@ -77,20 +67,16 @@ export const fetchTasks = () => async (dispatch) => {
 // Function to perform logout
 export const logout = () => async () => {
   try {
-    // Get token from localStorage
     const token = localStorage.getItem("token");
 
-    // Set headers
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
 
-    // Call logout API
     const res = await axios.post(`${BASE_URL}/logout`, null, config);
     console.log(res.data);
-    // Clear localStorage
 
     return res.data;
   } catch (error: any) {
@@ -101,8 +87,6 @@ export const logout = () => async () => {
 // Function to add a task
 export const addTaskAction = async (taskData: Omit<Task, "id">) => {
   try {
-    // Send POST request to the backend API to add the task
-    // Set headers
     const config = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -123,8 +107,6 @@ export const addTaskAction = async (taskData: Omit<Task, "id">) => {
 // Function to add a task
 export const deleteTaskAction = async (taskId: string) => {
   try {
-    // Send POST request to the backend API to delete the task
-    // Set headers
     const config = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -142,19 +124,30 @@ export const deleteTaskAction = async (taskId: string) => {
 };
 
 // Function to add a task
-export const EditTaskAction = async (taskData: Task) => {
+export const editTaskAction = async (
+  id: string,
+  taskName: string,
+  taskDescription: string,
+  dueDate: string,
+  status: string
+) => {
   try {
-    const taskId = taskData.id;
-    // Send POST request to the backend API to add the task
-    // Set headers
+    const taskId = id;
+
     const config = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+    const body = {
+      title: taskName,
+      description: taskDescription,
+      dueDate: dueDate,
+      status: status,
+    };
     const response = await axios.put<Task>(
       `http://localhost:3001/tasks/${taskId}`,
-      taskData,
+      body,
       config
     );
 

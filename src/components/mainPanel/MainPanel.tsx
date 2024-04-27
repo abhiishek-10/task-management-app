@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import CustomNavbar from "../../components/navbar/CustomNavbar";
 import styles from "./mainPanel.module.css";
+import { useState } from "react";
 
 const MainPanel = () => {
   const navigate = useNavigate();
@@ -11,7 +12,12 @@ const MainPanel = () => {
     // If not authenticated, redirect to the login page
     navigate("/");
   }
+  const [value, setValue] = useState(false);
 
+  const handleTaskUpdate = () => {
+    // Logic to update value
+    setValue((prev) => !prev);
+  };
   return (
     <main>
       <CustomNavbar />
@@ -19,8 +25,8 @@ const MainPanel = () => {
         <Container>
           <div className={` ${styles.mainPanelWrapper}`}>
             <div className={styles.mainPanel}>
-              <TaskInputArea />
-              <TaskShowcasePanel />
+              <TaskInputArea handleTaskUpdate={handleTaskUpdate} />
+              <TaskShowcasePanel value={value} />
             </div>
           </div>
         </Container>

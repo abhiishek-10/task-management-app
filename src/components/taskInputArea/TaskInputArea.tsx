@@ -1,38 +1,66 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../features/task/taskSlice";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, editTask } from "../../features/task/taskSlice";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
 import styles from "./taskInputArea.module.css";
-import { fetchTasks } from "../../apis/authApi";
 
-const TaskInputArea = () => {
-  const [taskName, setTaskName] = useState<string>("");
-  const [taskDescription, setTaskDescription] = useState<string>("");
-  const [taskStatus, setTaskStatus] = useState<string>("");
+const TaskInputArea = ({ handleTaskUpdate }) => {
+  const [taskName, setTaskName] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskStatus, setTaskStatus] = useState("Todo");
+  const [updateBtn, setUpdateBtn] = useState(false);
   const [selected, setSelected] = useState<Date | undefined>(new Date());
+  const editedTask = useSelector((state) => state.task.editedTaskValues);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (editedTask) {
+      setUpdateBtn(true);
+      setTaskName(editedTask.taskName);
+      setTaskDescription(editedTask.description);
+      setTaskStatus(editedTask.status);
+      setSelected(new Date(editedTask.dueDate));
+    }
+  }, [editedTask]);
 
   const addTaskHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!taskName || !taskDescription || !selected) return;
-    dispatch(
-      addTask({
-        title: taskName,
-        description: taskDescription,
-        status: taskStatus,
-        dueDate: format(selected, "PP"),
-      })
-    );
+    if (editedTask) {
+      // Dispatch editTask action with updated task data
+      dispatch(
+        editTask({
+          id: editedTask.taskId,
+          title: taskName,
+          description: taskDescription,
+          dueDate: format(selected, "PP"),
+          status: taskStatus,
+        })
+      );
+    } else {
+      // Dispatch addTask action if no edited task
+      dispatch(
+        addTask({
+          title: taskName,
+          description: taskDescription,
+          dueDate: format(selected, "PP"),
+          status: taskStatus,
+        })
+      );
+    }
+
+    // Clear form fields after adding/editing task
     setTaskName("");
     setTaskDescription("");
+    setTaskStatus("Todo");
     setSelected(new Date());
+    setUpdateBtn(false);
+    handleTaskUpdate();
   };
-
   return (
     <form onSubmit={addTaskHandler}>
       <div className={styles.inputArea}>
@@ -69,12 +97,11 @@ const TaskInputArea = () => {
             value={taskStatus}
             onChange={(e) => setTaskStatus(e.target.value)}
           >
-            <option>Select Task Status</option>
             <option value="Todo">Todo</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
           </Form.Select>
-          <button className="common-btn">Add</button>
+          <button className="common-btn">{updateBtn ? "Update" : "Add"}</button>
         </div>
         <DayPicker
           mode="single"
